@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pomodoro Sayacı</title>
+  <link rel="stylesheet" href="style.css?v=3" />
+</head>
+
+<body>
+  <!-- SIDEBAR TOGGLE (gear icon) -->
+  <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Ayarları aç">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7z" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round" />
+      <path
+        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09c0-.6-.39-1.14-.98-1.46a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06c.39-.39.5-1 .33-1.51A1.65 1.65 0 0 0 5 15.4H5a2 2 0 1 1 0-4h.09c.6 0 1.14-.39 1.46-.98a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06c.39.39 1 .5 1.51.33.4-.14.82-.21 1.24-.21H12c.6 0 1.14.39 1.46.98.27.52.17 1.12-.33 1.51l-.06.06a2 2 0 1 1 2.83 2.83l.06-.06c.39-.39 1-.5 1.51-.33.6.24 1.04.75 1.04 1.46V11a2 2 0 1 1 0 4h-.09z"
+        stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </button>
+
+  <!-- OVERLAY when sidebar open -->
+  <div id="overlay" class="overlay hidden" tabindex="-1"></div>
+
+
+
+  <!-- SIDEBAR -->
+  <aside id="sidebar" class="sidebar" aria-hidden="true">
+    <div class="sidebar-header">
+      <h3>Ayarlar & Notlar</h3>
+      <button id="sidebar-close" class="close" aria-label="Kapat">✕</button>
+    </div>
+
+    <div class="sidebar-section">
+      <h4>Ayarlar</h4>
+      <label>Çalışma (dakika)
+        <input id="work-time" type="number" min="1" value="25">
+      </label>
+      <label>Mola (dakika)
+        <input id="break-time" type="number" min="1" value="5">
+      </label>
+      <label>Uzun Mola (dakika)
+        <input id="long-break-time" type="number" min="1" value="15">
+      </label>
+      <label>Uzun mola her
+        <input id="long-break-every" type="number" min="1" value="4"> pomodoro sonrası
+      </label>
+      <div class="sidebar-actions">
+        <button id="set-time">Kaydet</button>
+        <button id="reset-settings">Varsayılan</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- TOP BAR (mode center, theme right) -->
+  <header class="topbar">
+    <div class="topbar-center">
+      <label for="preset" class="preset-label">Mod</label>
+      <select id="preset" class="preset">
+        <option value="classic">Classic (25 / 5)</option>
+        <option value="deep">Deep Work (50 / 10)</option>
+        <option value="custom">Custom</option>
+      </select>
+    </div>
+
+    <div class="topbar-right">
+      <label for="theme" class="theme-label">Tema</label>
+      <select id="theme">
+        <option value="dark">Dark</option>
+        <option value="neon">Neon</option>
+      </select>
+    </div>
+  </header>
+
+  <!-- MAIN APP -->
+  <main class="main">
+    <section class="timer-card">
+      <div class="phase-row">
+        <div id="phase-label" class="phase-label">Çalışma</div>
+        <div id="pomodoro-count" class="pomodoro-count">Pomodoro: 0</div>
+      </div>
+
+      <div class="progress-wrap">
+        <svg class="progress-ring" width="260" height="260" viewBox="0 0 220 220">
+          <circle class="progress-ring__bg" cx="110" cy="110" r="94" stroke-width="12" fill="none"></circle>
+          <circle class="progress-ring__circle" cx="110" cy="110" r="94" stroke-width="12" fill="none"></circle>
+        </svg>
+        <div class="time-display">
+          <span id="minutes">25</span>:<span id="seconds">00</span>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="start">Başlat</button>
+        <button id="stop">Durdur</button>
+        <button id="reset">Sıfırla</button>
+        <button id="skip">Atla</button>
+        <button id="mode-toggle" class="secondary">Mola Moduna Geç</button>
+      </div>
+
+      <div class="small-info">
+        <div id="next-action">Sonraki: Mola (5 dk)</div>
+      </div>
+
+
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>Pomodoro Sayacım — Designed By Adem_bex</small>
+  </footer>
+
+  <script src="script.js?v=3"></script>
+</body>
+
+</html>

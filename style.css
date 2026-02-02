@@ -1,0 +1,510 @@
+/* Genel Temel */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+:root {
+  --bg: #0f1113;
+  --card: #151617;
+  --muted: #9aa6b2;
+  --text: #e6eef8;
+  --accent: #ff9800;
+  --accent-dark: #e68900;
+  --glass: rgba(255, 255, 255, 0.03);
+}
+
+* {
+  box-sizing: border-box
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text)
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 100vh
+}
+
+/* Sidebar toggle (gear) */
+.sidebar-toggle {
+  position: fixed;
+  left: 18px;
+  top: 18px;
+  z-index: 70;
+  background: var(--card);
+  color: var(--text);
+  border: none;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
+.sidebar-toggle svg {
+  color: var(--muted)
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 60;
+  transition: opacity .25s ease;
+}
+
+
+
+/* Break Mode Overrides */
+body.break-mode {
+  --accent: #2ecc71;
+  /* Green for break */
+  --accent-dark: #27ae60;
+}
+
+body.break-mode .progress-ring__circle {
+  stroke: var(--accent);
+  /* Force green progress in break mode */
+}
+
+.hidden {
+  display: none;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 320px;
+  transform: translateX(-100%);
+  background: linear-gradient(180deg, var(--card), #0d1011);
+  color: var(--text);
+  box-shadow: 8px 0 30px rgba(0, 0, 0, 0.6);
+  padding: 18px;
+  z-index: 80;
+  transition: transform .28s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar.open {
+  transform: translateX(0)
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+
+.sidebar-header h3 {
+  margin: 0;
+  font-size: 1.15rem
+}
+
+.sidebar .close {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 20px;
+  cursor: pointer
+}
+
+/* Sidebar content */
+.sidebar-section {
+  padding: 8px 0
+}
+
+.sidebar-section h4 {
+  margin: 6px 0;
+  color: var(--accent)
+}
+
+.sidebar-section label {
+  display: flex;
+  flex-direction: column;
+  margin: 8px 0;
+  font-size: 0.95rem;
+  color: var(--muted)
+}
+
+.sidebar-section input[type="number"] {
+  width: 100px;
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  background: var(--glass);
+  color: var(--text)
+}
+
+.sidebar-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px
+}
+
+.sidebar-actions button {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: none;
+  background: var(--accent);
+  color: #000;
+  cursor: pointer
+}
+
+textarea#quick-note {
+  width: 100%;
+  min-height: 90px;
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  background: #0b0c0e;
+  color: var(--text);
+  resize: vertical
+}
+
+.full {
+  width: 100%;
+  padding: 8px;
+  border-radius: 10px;
+  border: none;
+  background: #0e1112;
+  color: var(--text);
+  cursor: pointer
+}
+
+.history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 240px;
+  overflow: auto
+}
+
+.history-list li {
+  padding: 6px 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  font-size: 0.9rem;
+  color: var(--muted)
+}
+
+/* TOPBAR */
+.topbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  z-index: 50;
+  pointer-events: none
+}
+
+.topbar-center,
+.topbar-right {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px
+}
+
+.topbar-center {
+  position: relative
+}
+
+.preset,
+#theme {
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: none;
+  background: var(--card);
+  color: var(--text);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5)
+}
+
+.preset-label,
+.theme-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-right: 6px
+}
+
+/* MAIN area */
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 120px 20px 40px
+}
+
+.timer-card {
+  width: 760px;
+  max-width: 92vw;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  border-radius: 14px;
+  padding: 34px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6)
+}
+
+.phase-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px
+}
+
+.phase-label {
+  font-size: 1.1rem;
+  font-weight: 600
+}
+
+.pomodoro-count {
+  font-size: 0.95rem;
+  color: var(--muted)
+}
+
+/* progress circle */
+.progress-wrap {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  margin: 8px auto 20px
+}
+
+.progress-ring {
+  transform: rotate(-90deg)
+}
+
+.progress-ring__bg {
+  stroke: rgba(255, 255, 255, 0.06);
+  stroke-width: 12
+}
+
+.progress-ring__circle {
+  stroke: var(--accent);
+  stroke-width: 12;
+  stroke-linecap: round;
+  transition: stroke-dashoffset .6s linear, stroke .3s linear
+}
+
+.time-display {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.6rem;
+  font-weight: 700
+}
+
+/* controls */
+.controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 18px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.controls button {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  background: var(--accent);
+  color: #000;
+  cursor: pointer;
+  font-weight: 600
+}
+
+.mode-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.controls button.secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--muted);
+}
+
+.controls button.secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.small-info {
+  margin-top: 12px;
+  color: var(--muted)
+}
+
+
+/* footer */
+.footer {
+  text-align: center;
+  padding: 14px;
+  color: var(--muted);
+  font-size: 0.85rem
+}
+
+/* THEMES */
+body.light {
+  --bg: #f4f4f4;
+  --card: #fff;
+  --text: #0b0b0b;
+  --accent: #1976d2;
+  --muted: #6b7280
+}
+
+body.neon {
+  --bg: #07090b;
+  --card: #07121a;
+  --text: #e6fff6;
+  --accent: #00ffd5;
+  --muted: #7ee3d6
+}
+
+body.pastel {
+  --bg: #f7f3ff;
+  --card: #fff7fd;
+  --text: #2b2b39;
+  --accent: #ff7aa2;
+  --muted: #9b8fb3
+}
+
+/* Responsive */
+/* Responsive */
+@media (max-width: 900px) {
+  .sidebar {
+    width: 280px;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.6);
+  }
+
+  .timer-card {
+    width: 90vw;
+    padding: 24px;
+    margin-top: -40px;
+    /* Üstteki boşluğu biraz azalt */
+  }
+
+  .time-display {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .topbar {
+    top: 10px;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: none;
+    /* Arka plandakilere tıklanabilsin */
+  }
+
+  .topbar-center,
+  .topbar-right {
+    pointer-events: auto;
+    background: rgba(21, 22, 23, 0.85);
+    /* Arkası görünen cam efekti */
+    backdrop-filter: blur(8px);
+    padding: 4px 12px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Preset ve theme etiketlerini gizle, sadece dropdown kalsın */
+  .preset-label,
+  .theme-label {
+    display: none;
+  }
+
+  .sidebar-toggle {
+    top: auto;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+    background: var(--accent);
+    color: #000;
+  }
+
+  .sidebar-toggle svg {
+    color: #000;
+    width: 28px;
+    height: 28px;
+  }
+
+  .sidebar {
+    width: 85%;
+    max-width: 320px;
+  }
+
+  .main {
+    padding: 100px 16px 20px;
+    align-items: flex-start;
+    /* Mobilde kartı yukarı yasla */
+  }
+
+  .timer-card {
+    width: 100%;
+    padding: 20px 16px;
+    border-radius: 20px;
+  }
+
+  .progress-wrap {
+    width: 220px;
+    height: 220px;
+    margin-bottom: 24px;
+  }
+
+  .progress-ring {
+    width: 220px;
+    height: 220px;
+  }
+
+  .time-display {
+    font-size: 2.8rem;
+  }
+
+  .controls {
+    gap: 10px;
+  }
+
+  .controls button {
+    flex: 1 1 40%;
+    /* Butonlar yan yana sığsın ama esnek olsun */
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
+  /* "Mola Moduna Geç" butonu tam genişlik olsun */
+  .controls button#mode-toggle {
+    flex: 1 1 100%;
+    order: 10;
+    /* En alta al */
+    margin-top: 8px;
+  }
+
+  .footer {
+    padding-bottom: 80px;
+    /* Toggle butonu için boşluk */
+  }
+}
